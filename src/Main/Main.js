@@ -1,15 +1,22 @@
-import { useContext } from "react";
-import { LocationContext } from "../Location/LocationContext.js";
+import { useState } from "react";
+
+import Profile from "../Profile/Profile.js";
 
 function Main(props) {
-  const { lat, lng, setIsMapOpen } = useContext(LocationContext);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
   return (
     <div>
-      <div>main page here</div>
-      <div>
-        current location is {lat}, {lng}
-      </div>
-      <button onClick={() => setIsMapOpen(true)}>change location</button>
+      {isProfileOpen && <Profile setIsProfileOpen={setIsProfileOpen} />}
+      {!isProfileOpen && (
+        <div>
+          <h1>our app name owo</h1>
+          <button onClick={() => setIsProfileOpen(true)}>
+            go to profile page
+          </button>
+
+          <div>images go brr</div>
+        </div>
+      )}
     </div>
   );
 }
