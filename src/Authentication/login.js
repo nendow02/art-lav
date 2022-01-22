@@ -4,7 +4,6 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  signOut,
 } from "firebase/auth";
 import { useState, useContext } from "react";
 import { AuthContext } from "./AuthContext";
@@ -101,13 +100,6 @@ function Login(props) {
           Sign Up!
         </button>
         <br />
-        <button
-          onClick={() => {
-            signOut(auth).then(() => console.log("signed out"));
-          }}
-        >
-          Sign out
-        </button>
       </div>
     </div>
   );
