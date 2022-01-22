@@ -1,8 +1,9 @@
 import { useState } from "react";
-import Upload from "../upload.js";
+import Upload from "../Upload/upload.js";
 import Profile from "../Profile/Profile.js";
 import Image from "../Image/Image.js";
 import OutsideAlerter from "../Image/OutsideAlerter.js";
+import profileImg from "../img/profile.svg";
 import "./main.css";
 
 // dummy images
@@ -60,11 +61,12 @@ function Main(props) {
 
           <div className={openedImage && "blur"}>
             <h1>our app name owo</h1>
-            <button onClick={() => setIsProfileOpen(true)}>
-              go to profile page
-            </button>
+            <img
+              className="profile-button"
+              src={profileImg}
+              onClick={() => setIsProfileOpen(true)}
+            />
             <Upload />
-            <div>images go brr</div>
             {showImages()}
           </div>
         </div>
