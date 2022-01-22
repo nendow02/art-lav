@@ -16,11 +16,11 @@ function Upload() {
         return;
       }
       if (!e) {
-          console.log("No file selected");
+          alert("No file selected");
           return;
       }
       if (lat === null || lng === null) {
-          console.log("Location not chosen");
+          alert("Location not chosen");
           return;
       }
       let id = auth.currentUser.uid;
@@ -37,13 +37,13 @@ function Upload() {
             updateMetadata(newRef,newMetadata)
                .then(() => console.log("metadata success"))
                .catch((error) => {
-                  console.log(error.message);
-         });
+                  alert(error.message);
+             });
           })
           .catch((error) => {
-                console.log(error.message);
+                alert(error.message);
         });
-    }
+  };
 
   return (
     <div>
