@@ -1,0 +1,14 @@
+.column-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.image {
+  width: 200px;
+  margin: 10px;
+}
