@@ -14,7 +14,18 @@
     background-color: transparent;
     border-width: 0px;
     color:white;
-    font-family: 'sf-pro-display','regular';
+    font-size: 13px;
+}
+
+.login {
+    margin-top: 1rem;
+    width: 20rem;
+    height: 2.5rem;
+    border-radius: 20px;
+    border-width: 0;
+    font-size: 17px;
+    padding-left: 1rem;
+    background-color: #C4C4C4;
 }
 
 .logo {
