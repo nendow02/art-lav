@@ -1,6 +1,8 @@
 import { useState } from "react";
 import Upload from "../upload.js";
 import Profile from "../Profile/Profile.js";
+import Image from "../Image/Image.js";
+import OutsideAlerter from "../Image/OutsideAlerter.js";
 import "./main.css";
 
 // dummy images
@@ -9,6 +11,7 @@ import Hornbee from "../img/hornbee.png";
 
 function Main(props) {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [openedImage, setOpenedImage] = useState(null);
 
   // generating list of dummy images
   const dummyImages = () => {
@@ -24,17 +27,19 @@ function Main(props) {
   const showImages = () => {
     const images = dummyImages();
     const imageLayout = [[], [], [], [], []];
-
     for (let i = 0; i < images.length; i++) {
       imageLayout[i % 5].push(images[i]);
     }
-
     return (
       <div className="column-container">
         {imageLayout.map((col) => (
           <div className="column">
             {col.map((img) => (
-              <img src={img} className="image" />
+              <img
+                src={img}
+                className="image"
+                onClick={() => setOpenedImage(img)}
+              />
             ))}
           </div>
         ))}
@@ -47,14 +52,21 @@ function Main(props) {
       {isProfileOpen && <Profile setIsProfileOpen={setIsProfileOpen} />}
       {!isProfileOpen && (
         <div>
-          <h1>our app name owo</h1>
-          <button onClick={() => setIsProfileOpen(true)}>
-            go to profile page
-          </button>
+          {openedImage && (
+            <OutsideAlerter setOpenedImage={setOpenedImage}>
+              <Image img={openedImage} />
+            </OutsideAlerter>
+          )}
 
-          <div>images go brr</div>
-          {showImages()}
-          <Upload />
+          <div className={openedImage && "blur"}>
+            <h1>our app name owo</h1>
+            <button onClick={() => setIsProfileOpen(true)}>
+              go to profile page
+            </button>
+            <div>images go brr</div>
+            {showImages()}
+            <Upload />
+          </div>
         </div>
       )}
     </div>
