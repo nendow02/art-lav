@@ -1,6 +1,10 @@
+import './login.css';
 import {initializeApp} from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut  } from "firebase/auth";
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import {AuthContext} from './AuthContext';
+import {LocationContext} from '../Location/LocationContext';
+
 
 function Login(props) {
     // Your web app's Firebase configuration
@@ -15,22 +19,40 @@ function Login(props) {
     
     // Initialize Firebase
     initializeApp(config);
-    
+    const {setid,setIsSignedIn} = useContext(AuthContext);
+    const {setIsMapOpen} = useContext(LocationContext);
     const auth = getAuth();
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
-    const [errorMsg,setErrorMsg] = useState("");
 
   return (
     <div>
+      <img alt='logo' className='logo'/><br/>
       <input 
-        placeholder='email' 
+        className='input'
+        placeholder='Email' 
         onChange={(e) => setEmail(e.target.value)} 
-        value={email}/>
+        value={email}/><br/>
       <input 
-            placeholder='password' 
-            onChange={(e) => setPassword(e.target.value)} 
-            value={password}/>
+        className='input'
+        placeholder='Password' 
+        onChange={(e) => setPassword(e.target.value)} 
+        value={password}/><br/>
+      <button onClick={() => {
+          signInWithEmailAndPassword(auth, email, password)
+              .then((userCredential) => {
+              // Signed in 
+                setid(userCredential.user.id);
+                setIsSignedIn(true);
+                setIsMapOpen(true);
+              })
+              .catch((error) => {
+                    alert(error.message);
+        });
+         }}>Log in</button><br/>
+      <button className='forgot' onChange={() => {
+        console.log("need to implement still");
+      }}>Forgot Password?</button><br/>
       <button onClick={() => {
             createUserWithEmailAndPassword(auth, email, password)
                 .then((userCredential) => {
@@ -39,35 +61,14 @@ function Login(props) {
                 props.handleSuccess();
                 })
                 .catch((error) => {
-                    // const errorCode = error.code;
-                    // if (errorCode == "auth/weak-password")
-                    //     setErrorMsg("Weak password")
-                    // else 
-                        setErrorMsg(error.message);
+                      alert(error.message);
          });
-      }}>Create Account</button>
-      <button onClick={() => {
-            signInWithEmailAndPassword(auth, email, password)
-                .then((userCredential) => {
-                // Signed in 
-                const user = userCredential.user;
-                props.handleSuccess();
-                // ...
-                })
-                .catch((error) => {
-                    // const errorCode = error.code;
-                    // if (errorCode == "auth/weak-password")
-                    //     setErrorMsg("Weak password")
-                    // else 
-                        setErrorMsg(error.message);
-         });
-      }}>Sign In</button>
+      }}>Create Account</button><br/>
       <button onClick={() => {
         signOut(auth)
           .then(()=> console.log("signed out"));
       }}>
       Sign out</button>
-      <div>{errorMsg}</div>
     </div>
   );
 }

@@ -12,7 +12,7 @@ export const LocationContext = createContext({
 export const LocationProvider = (props) => {
   const [lat, setLat] = useState(34.06);
   const [lng, setLng] = useState(-118.44);
-  const [isMapOpen, setIsMapOpen] = useState(true);
+  const [isMapOpen, setIsMapOpen] = useState(false);
   return (
     // the Provider gives access to the context to its children
     <LocationContext.Provider

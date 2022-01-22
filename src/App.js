@@ -1,11 +1,14 @@
 import AppScreen from "./AppScreen.js";
+import { AuthProvider } from "./Authentication/AuthContext.js";
 import { LocationProvider } from "./Location/LocationContext.js";
 
 function App() {
   return (
-    <LocationProvider>
-      <AppScreen />
-    </LocationProvider>
+    <AuthProvider>
+      <LocationProvider>
+        <AppScreen />
+      </LocationProvider>
+    </AuthProvider>
   );
 }
 

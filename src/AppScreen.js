@@ -1,18 +1,19 @@
 import "./App.css";
-import { useContext,useState } from "react";
+import { useContext } from "react";
 import { LocationContext } from "./Location/LocationContext.js";
-import Login from "./login";
+import { AuthContext } from "./Authentication/AuthContext";
+import Login from "./Authentication/login";
 import Location from "./Location/Location.js";
 import Main from "./Main/Main.js";
 
 function AppScreen() {
   const { isMapOpen } = useContext(LocationContext);
-  const [loginOpen,setLoginOpen] = useState(true);
+  const {isSignedIn} = useContext(AuthContext);
   return (
     <div className="App">
-      {loginOpen ? <Login handleSuccess={() => setLoginOpen(!loginOpen)}/>: null}
+      {!isSignedIn && <Login/>}
       {isMapOpen && <Location />}
-      {!isMapOpen && <Main />}
+      {!isMapOpen && isSignedIn && <Main />}
     </div>
   );
 }
