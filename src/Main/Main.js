@@ -37,7 +37,7 @@ function Main(props) {
             {col.map((img) => (
               <img
                 src={img}
-                className="image"
+                className={`image ${openedImage && "unclickable"}`}
                 onClick={() => setOpenedImage(img)}
               />
             ))}
@@ -48,7 +48,7 @@ function Main(props) {
   };
 
   return (
-    <div>
+    <div className="main">
       {isProfileOpen && <Profile setIsProfileOpen={setIsProfileOpen} />}
       {!isProfileOpen && (
         <div>
@@ -63,9 +63,9 @@ function Main(props) {
             <button onClick={() => setIsProfileOpen(true)}>
               go to profile page
             </button>
+            <Upload />
             <div>images go brr</div>
             {showImages()}
-            <Upload />
           </div>
         </div>
       )}

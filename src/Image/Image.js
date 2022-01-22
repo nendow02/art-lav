@@ -1,5 +1,7 @@
+import "./image.css";
+
 function Image(props) {
-  return <img src={props.img} />;
+  return <img className="opened-image" src={props.img} />;
 }
 
 export default Image;
