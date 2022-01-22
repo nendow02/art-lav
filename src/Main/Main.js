@@ -2,8 +2,15 @@ import { useState } from "react";
 
 import Profile from "../Profile/Profile.js";
 
+// dummy images
+import Eren from "../img/eren.png";
+import Hornbee from "../img/hornbee.png";
+
 function Main(props) {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+
+  // generating list of dummy images
+
   return (
     <div>
       {isProfileOpen && <Profile setIsProfileOpen={setIsProfileOpen} />}
