@@ -2,14 +2,14 @@ import { useContext } from "react";
 import { LocationContext } from "../Location/LocationContext.js";
 
 function Main(props) {
-  const { lat, lng } = useContext(LocationContext);
+  const { lat, lng, setIsMapOpen } = useContext(LocationContext);
   return (
     <div>
       <div>main page here</div>
       <div>
         current location is {lat}, {lng}
       </div>
-      <button onClick={() => props.setMap(!props.Map)}>change location</button>
+      <button onClick={() => setIsMapOpen(true)}>change location</button>
     </div>
   );
 }

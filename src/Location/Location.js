@@ -6,7 +6,8 @@ const Map = (props) => {
   const DefaultZoom = 10;
   const [zoom, setZoom] = useState(DefaultZoom);
 
-  const { lat, lng, setLat, setLng } = useContext(LocationContext);
+  const { lat, lng, setLat, setLng, setIsMapOpen } =
+    useContext(LocationContext);
 
   function handleChangeLocation(lat, lng) {
     setLat(lat);
@@ -15,10 +16,6 @@ const Map = (props) => {
 
   function handleChangeZoom(newZoom) {
     setZoom(newZoom);
-  }
-
-  function closeMap() {
-    props.setMap(!props.map);
   }
 
   return (
@@ -33,7 +30,7 @@ const Map = (props) => {
         apiKey="AIzaSyD07E1VvpsN_0FvsmKAj4nK9GnLq-9jtj8"
         style={{ height: "500px", width: "500px", margin: "0 auto" }}
       />
-      <button style={{ margin: "20px" }} onClick={closeMap}>
+      <button style={{ margin: "20px" }} onClick={() => setIsMapOpen(false)}>
         I'm done!
       </button>
     </div>
