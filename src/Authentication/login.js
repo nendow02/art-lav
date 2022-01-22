@@ -38,7 +38,7 @@ function Login(props) {
         placeholder='Password' 
         onChange={(e) => setPassword(e.target.value)} 
         value={password}/><br/>
-      <button onClick={() => {
+      <button className='login' onClick={() => {
           signInWithEmailAndPassword(auth, email, password)
               .then((userCredential) => {
               // Signed in 
@@ -57,8 +57,7 @@ function Login(props) {
             createUserWithEmailAndPassword(auth, email, password)
                 .then((userCredential) => {
                 // Signed in 
-                const user = userCredential.user;
-                props.handleSuccess();
+                setid(userCredential.user.id);
                 })
                 .catch((error) => {
                       alert(error.message);
