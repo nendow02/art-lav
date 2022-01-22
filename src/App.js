@@ -1,16 +1,12 @@
-import { useState } from 'react';
-import './App.css';
-import Login from './login';
-import Upload from './upload';
+import AppScreen from "./AppScreen.js";
+import { LocationProvider } from "./Location/LocationContext.js";
 
 function App() {
   const [loginOpen,setLoginOpen] = useState(true);
   return (
-    <div>
-      {loginOpen ? <Login handleSuccess={() => setLoginOpen(!loginOpen)}/>: null}
-      <div>main page</div>
-      <Upload/>
-    </div>
+    <LocationProvider>
+      <AppScreen />
+    </LocationProvider>
   );
 }
 
