@@ -1,4 +1,4 @@
-import './upload.css';
+import '../src/Upload/upload.css';
 import { getAuth } from "firebase/auth";
 import { getStorage, ref, uploadBytes, updateMetadata } from "firebase/storage";
 import { LocationContext } from './Location/LocationContext';
