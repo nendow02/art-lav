@@ -20,7 +20,7 @@ import map from "../img/map.svg";
 import "./profile.css";
 
 function Profile(props) {
-  const { lat, lng, setIsMapOpen } = useContext(LocationContext);
+  const {lat,lng, setIsMapOpen } = useContext(LocationContext);
   const { setIsSignedIn } = useContext(AuthContext);
   const { setIsProfileOpen } = useContext(ProfileContext);
   const auth = getAuth();
@@ -36,13 +36,7 @@ function Profile(props) {
       let result = await listAll(newRef);
       let urlsPromises = result.items.map((itemRef) => {
         return getMetadata(itemRef).then((metadata) => {
-          const latDiff = parseFloat(metadata.customMetadata.lat) - lat;
-          const lngDiff = parseFloat(metadata.customMetadata.long) - lng;
-          const distance = Math.sqrt(
-            Math.pow(latDiff, 2) + Math.pow(lngDiff, 2)
-          );
-          if (distance < 0.3) {
-            // 20 miles
+          if (metadata.customMetadata.id === auth.currentUser.uid) {
             return getDownloadURL(itemRef);
           } else return null;
         });
@@ -58,7 +52,7 @@ function Profile(props) {
 
   const showImages = () => {
     const imageLayout = [[], [], [], [], []];
-    const images = [...urls];
+    const images = [...urls].filter(url => url != null);
     console.log(images);
     for (let i = 0; i < images.length; i++) {
       imageLayout[i % 5].push(images[i]);

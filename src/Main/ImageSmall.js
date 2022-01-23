@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import unlikedImg from "../img/unliked.svg";
 import unlikedImgHover from "../img/unliked-hover.svg";
 import likedImg from "../img/liked.svg";
+import { updateMetadata, getMetadata, getStorage, ref} from "firebase/storage";
 import "./main.css";
 
 function ImageSmall(props) {
@@ -9,6 +10,31 @@ function ImageSmall(props) {
 
   // changes this Liked var from a useState to props later
   const [liked, setLiked] = useState(false);
+  const storage = getStorage();
+
+  const handleClick = (liked) => {
+    const newRef = ref(storage, "images/"+props.name);
+    getMetadata(newRef)
+      .then((oldMeta) => {
+        console.log(oldMeta);
+        let addonLike = liked ? 1 : -1;
+        const newMetadata = {
+          customMetadata: {
+            lat: oldMeta.customMetadata.lat,
+            long: oldMeta.customMetadata.long,
+            id: oldMeta.customMetadata.id,
+            likes: (parseInt(oldMeta.customMetadata.likes) + addonLike).toString()
+          },
+        }
+        updateMetadata(newRef,newMetadata)
+          .then(() => {
+            console.log("like metadata success");
+          })
+          .catch((error) => {
+            alert(error.message);
+          });
+      })
+  }
 
   return (
     <div
@@ -25,7 +51,10 @@ function ImageSmall(props) {
         <img
           className={`like-button-main ${!showLike && "invisible"}`}
           src={unlikedImg}
-          onClick={() => setLiked(true)}
+          onClick={() => {
+            setLiked(true);
+            handleClick(true);
+          }}
           onMouseOver={(e) => (e.currentTarget.src = unlikedImgHover)}
           onMouseOut={(e) => (e.currentTarget.src = unlikedImg)}
         />
@@ -34,7 +63,10 @@ function ImageSmall(props) {
         <img
           className={`like-button-main`}
           src={likedImg}
-          onClick={() => setLiked(false)}
+          onClick={() => {
+            setLiked(false);
+            handleClick(false);
+          }}
         />
       )}
       <img

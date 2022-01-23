@@ -18,9 +18,15 @@ import "./main.css";
 
 function Main(props) {
   const [openedImage, setOpenedImage] = useState(null);
-  const { lat, lng } = useContext(LocationContext);
+  const {lat,lng} = useContext(LocationContext); 
+  const [urls,setUrls] = useState([]);
+  const [names,setNames] = useState([]);
+  const [change,setChange] = useState(false);
   const { isProfileOpen, setIsProfileOpen } = useContext(ProfileContext);
-  const [urls, setUrls] = useState([]);
+  
+  const handleChange = () => {
+    setChange(!change);
+  }
 
   // Download photos
   useEffect(() => {
@@ -28,18 +34,18 @@ function Main(props) {
       const storage = getStorage();
       const newRef = ref(storage, "images");
       let result = await listAll(newRef);
-      let urlsPromises = result.items.map((itemRef) => {
-        return getMetadata(itemRef).then((metadata) => {
-          const latDiff = parseFloat(metadata.customMetadata.lat) - lat;
-          const lngDiff = parseFloat(metadata.customMetadata.long) - lng;
-          const distance = Math.sqrt(
-            Math.pow(latDiff, 2) + Math.pow(lngDiff, 2)
-          );
-          if (distance < 0.3) {
-            // 20 miles
-            return getDownloadURL(itemRef);
-          } else return null;
-        });
+      let urlsPromises = result.items.map(itemRef => {
+            return getMetadata(itemRef)
+              .then((metadata) => {
+                const latDiff = parseFloat(metadata.customMetadata.lat) - lat;
+                const lngDiff = parseFloat(metadata.customMetadata.long) - lng;
+                const distance = Math.sqrt(Math.pow(latDiff,2) + Math.pow(lngDiff,2));
+                console.log(distance);
+                if (distance < .3) { // 20 miles
+                  setNames(refs => [...refs,itemRef.name]);
+                  return getDownloadURL(itemRef);
+                } else return null;
+              });
       });
       return Promise.all(urlsPromises);
     };
@@ -48,14 +54,18 @@ function Main(props) {
       setUrls(urls);
     };
     loadImages();
-  }, []);
-
-  const showImages = () => {
+  }
+  
+  ,[change,lat,lng]);
+  
+  const showImages = () =>  {
     const imageLayout = [[], [], [], [], []];
-    const images = [...urls];
-    console.log(images);
+    const refLayout = [[],[],[],[],[]];
+    const images = [...urls].filter(url => url != null);
     for (let i = 0; i < images.length; i++) {
       imageLayout[i % 5].push(images[i]);
+      refLayout[i % 5].push(names[i]);
+      console.log(images[i]);
     }
     return (
       <div className="column-container">
@@ -64,6 +74,7 @@ function Main(props) {
             {col.map((img) => (
               <ImageSmall
                 img={img}
+                name={refLayout[col.indexOf(img)]}
                 openedImage={openedImage}
                 setOpenedImage={setOpenedImage}
               />
@@ -92,7 +103,7 @@ function Main(props) {
               src={profileImg}
               onClick={() => setIsProfileOpen(true)}
             />
-            <Upload />
+            <Upload onChange={handleChange}/>
             {showImages()}
           </div>
         </div>
