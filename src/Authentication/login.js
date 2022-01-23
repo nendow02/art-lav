@@ -4,6 +4,7 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  sendPasswordResetEmail
 } from "firebase/auth";
 import { useState, useContext } from "react";
 import { AuthContext } from "./AuthContext";
@@ -67,6 +68,7 @@ function Login(props) {
           <input
             className="input"
             placeholder="Password"
+            type="password"
             onChange={(e) => setPassword(e.target.value)}
             value={password}
             onKeyPress={handleKeyPress}
@@ -79,8 +81,15 @@ function Login(props) {
         <br />
         <button
           className="forgot"
-          onChange={() => {
-            console.log("need to implement still");
+          onClick={() => {
+            sendPasswordResetEmail(auth,email)
+            .then(() => {
+              alert("An email has been sent!")
+            })
+            .catch((error) => {
+              if (error.code === 'auth/invalid-email')
+                alert("Please enter a valid email");
+            })
           }}
         >
           Forgot Password?

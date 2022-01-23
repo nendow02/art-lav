@@ -13,7 +13,9 @@ function ImageSmall(props) {
   const storage = getStorage();
 
   const handleClick = (liked) => {
+    console.log("aaa");
     const newRef = ref(storage, "images/"+props.name);
+    console.log(newRef);
     getMetadata(newRef)
       .then((oldMeta) => {
         console.log(oldMeta);

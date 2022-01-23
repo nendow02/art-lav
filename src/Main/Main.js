@@ -21,6 +21,7 @@ function Main(props) {
   const {lat,lng} = useContext(LocationContext); 
   const [urls,setUrls] = useState([]);
   const [names,setNames] = useState([]);
+  const [likes,setLikes] = useState([]);
   const [change,setChange] = useState(false);
   const { isProfileOpen, setIsProfileOpen } = useContext(ProfileContext);
   
@@ -31,6 +32,8 @@ function Main(props) {
   // Download photos
   useEffect(() => {
     const fetchImages = async () => {
+      setLikes([]);
+      setNames([]);
       const storage = getStorage();
       const newRef = ref(storage, "images");
       let result = await listAll(newRef);
@@ -42,7 +45,9 @@ function Main(props) {
                 const distance = Math.sqrt(Math.pow(latDiff,2) + Math.pow(lngDiff,2));
                 console.log(distance);
                 if (distance < .3) { // 20 miles
-                  setNames(refs => [...refs,itemRef.name]);
+                  setNames(names => [...names,itemRef.name]);
+                  console.log(metadata.customMetadata.likes);
+                  setLikes(likes => [...likes,parseInt(metadata.customMetadata.likes)]);
                   return getDownloadURL(itemRef);
                 } else return null;
               });
@@ -60,25 +65,33 @@ function Main(props) {
   
   const showImages = () =>  {
     const imageLayout = [[], [], [], [], []];
-    const refLayout = [[],[],[],[],[]];
     const images = [...urls].filter(url => url != null);
-    for (let i = 0; i < images.length; i++) {
-      imageLayout[i % 5].push(images[i]);
-      refLayout[i % 5].push(names[i]);
-      console.log(images[i]);
+    let pairs = [];
+    for (let i=0;i<images.length;i++) {
+      pairs.push([likes[i],images[i],names[i]]);
     }
+    pairs.sort(function(a,b){
+      return b[0]-a[0];
+    })
+    console.log(pairs);
+    for (let i = 0; i < images.length; i++) {
+      imageLayout[i % 5].push(pairs[i]);
+    }
+    console.log(imageLayout);
     return (
       <div className="column-container">
         {imageLayout.map((col) => (
           <div className="column">
-            {col.map((img) => (
+            {col.map((img) => {
+              console.log(img);
+              return (
               <ImageSmall
-                img={img}
-                name={refLayout[col.indexOf(img)]}
+                img={img[1]}
+                name={img[2]}
                 openedImage={openedImage}
                 setOpenedImage={setOpenedImage}
               />
-            ))}
+            )})}
           </div>
         ))}
       </div>
