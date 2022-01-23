@@ -26,7 +26,7 @@ Here is a detailed list of features:
 
 ### Design + Final Result
 
-![image](https://user-images.githubusercontent.com/50722281/150670055-fda6e5f9-9068-497e-a715-b4255e3d09c1.png)
+![image](https://user-images.githubusercontent.com/50722281/150686934-c4040e5e-a35f-4951-90f1-8e4ea5161d0c.png)
 
 #### Main Feed
 Special thanks to @chosuh for allowing us to use her art for the demo :)
