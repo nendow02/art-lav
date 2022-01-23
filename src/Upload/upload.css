@@ -9,7 +9,8 @@
 }
 
 .upload-button {
-  width: 80px;
+  width: 70px;
+  filter: drop-shadow(2px 6px 4px #353535);
 }
 
 .upload-button:hover {

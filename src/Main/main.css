@@ -1,5 +1,5 @@
 .main {
-  background-color: #3a3636;
+  background-color: #645c73;
   text-align: center;
   min-height: 100vh;
   display: flex;
@@ -7,7 +7,7 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: #d2c0f0;
 }
 
 .blur {
@@ -29,13 +29,23 @@
   flex-direction: column;
 }
 
-.image {
+.image-container-main {
+  position: relative;
   width: 200px;
   margin: 10px;
   cursor: pointer;
-  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
+.image {
+  position: relative;
+  width: 100%;
+  cursor: pointer;
+  border-radius: 10px;
+}
 .image:hover {
   opacity: 0.5;
 }
@@ -44,9 +54,21 @@
   pointer-events: none;
 }
 
+.like-button-main {
+  position: absolute;
+  z-index: 10;
+  cursor: pointer;
+  top: 5%;
+  right: 5%;
+  width: 10%;
+}
+
 .profile-button {
   cursor: pointer;
   position: absolute;
   top: 40px;
   right: 55px;
+}
+.profile-button:hover {
+  opacity: 0.5;
 }

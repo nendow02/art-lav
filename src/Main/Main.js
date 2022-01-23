@@ -4,11 +4,14 @@ import Profile from "../Profile/Profile.js";
 import Image from "../Image/Image.js";
 import OutsideAlerter from "../Image/OutsideAlerter.js";
 import profileImg from "../img/profile.svg";
+import ImageSmall from "./ImageSmall.js";
 import "./main.css";
 
 // dummy images
 import Eren from "../img/eren.png";
 import Hornbee from "../img/hornbee.png";
+
+const liked = false;
 
 function Main(props) {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
@@ -36,10 +39,10 @@ function Main(props) {
         {imageLayout.map((col) => (
           <div className="column">
             {col.map((img) => (
-              <img
-                src={img}
-                className={`image ${openedImage && "unclickable"}`}
-                onClick={() => setOpenedImage(img)}
+              <ImageSmall
+                img={img}
+                openedImage={openedImage}
+                setOpenedImage={setOpenedImage}
               />
             ))}
           </div>

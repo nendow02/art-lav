@@ -6,11 +6,14 @@
   border-width: 0;
   font-size: 18px;
   padding-left: 1rem;
-  background-color: #c4c4c4;
-  color: #3a3636;
+  background-color: #d2c0f0;
+  color: #645c73;
 }
 input:focus {
   outline: none;
+}
+input::placeholder {
+  color: #8e83a3;
 }
 
 .input-container {
@@ -23,7 +26,7 @@ input:focus {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #3a3636;
+  background-color: #645c73;
 }
 
 .vertical {
@@ -36,7 +39,7 @@ input:focus {
   margin-bottom: 0.5rem;
   background-color: transparent;
   border-width: 0px;
-  color: white;
+  color: #d2c0f0;
   font-size: 13px;
 }
 .forgot:hover {
@@ -45,10 +48,10 @@ input:focus {
 }
 
 .dont {
-  margin: 0.5rem;
+  margin-top: 0.5rem;
   background-color: transparent;
   border-width: 0px;
-  color: white;
+  color: #d2c0f0;
   font-size: 13px;
 }
 
@@ -59,8 +62,12 @@ input:focus {
   border-radius: 20px;
   border-width: 0;
   font-size: 26px;
-  background-color: #504e4e;
+  background-color: #886dbc;
   color: #e5e5e5;
+  cursor: pointer;
+}
+.login:hover {
+  opacity: 70%;
 }
 
 .signup {
@@ -70,8 +77,12 @@ input:focus {
   border-radius: 20px;
   border-width: 0;
   font-size: 26px;
-  background-color: #c4c4c4;
-  color: #3a3636;
+  background-color: #c8aef5;
+  color: #645c73;
+  cursor: pointer;
+}
+.signup:hover {
+  opacity: 70%;
 }
 
 .logo {

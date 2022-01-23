@@ -24,13 +24,12 @@ function Login(props) {
   // Initialize Firebase
   initializeApp(config);
   const { setid, setIsSignedIn } = useContext(AuthContext);
-  const { setIsMapOpen } = useContext(LocationContext);
+  const { setIsMapOpen, setNewAccount } = useContext(LocationContext);
   const auth = getAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleKeyPress = (e) => {
-    console.log(e);
     if (e.code === "Enter") login();
   };
 

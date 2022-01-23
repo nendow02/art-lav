@@ -21,7 +21,7 @@ const Map = (props) => {
 
   return (
     <div className="location">
-      <h2>Select your location:</h2>
+      <h2>Your Location</h2>
       <MapPicker
         defaultLocation={{ lat: lat, lng: lng }}
         zoom={zoom}
@@ -29,9 +29,19 @@ const Map = (props) => {
         onChangeLocation={handleChangeLocation}
         onChangeZoom={handleChangeZoom}
         apiKey="AIzaSyD07E1VvpsN_0FvsmKAj4nK9GnLq-9jtj8"
-        style={{ height: "500px", width: "500px", margin: "0 auto" }}
+        style={{
+          height: "400px",
+          width: "500px",
+          margin: "80px auto 0 auto",
+          borderRadius: "15px",
+          filter: `drop-shadow(5px 5px 5px #272727)`,
+        }}
       />
-      <button style={{ margin: "20px" }} onClick={() => setIsMapOpen(false)}>
+      <button
+        style={{ margin: "30px" }}
+        onClick={() => setIsMapOpen(false)}
+        className="done"
+      >
         I'm done!
       </button>
     </div>

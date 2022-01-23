@@ -15,9 +15,6 @@ function Profile(props) {
         go back to main page
       </button>
       <button onClick={() => setIsMapOpen(true)}>change location</button>
-      <div>
-        current location is {lat}, {lng}
-      </div>
       <button
         onClick={() => {
           signOut(auth).then(() => {

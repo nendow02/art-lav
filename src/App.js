@@ -6,6 +6,10 @@ function App() {
   return (
     <AuthProvider>
       <LocationProvider>
+        <style>
+          @import
+          url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+        </style>
         <AppScreen />
       </LocationProvider>
     </AuthProvider>
