@@ -63,6 +63,7 @@ function Profile(props) {
           <div className="column">
             {col.map((img) => (
               <ImageSmall
+                key={img}
                 img={img}
                 openedImage={openedImage}
                 setOpenedImage={setOpenedImage}

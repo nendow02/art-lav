@@ -44,10 +44,10 @@ function Main(props) {
                 const latDiff = parseFloat(metadata.customMetadata.lat) - lat;
                 const lngDiff = parseFloat(metadata.customMetadata.long) - lng;
                 const distance = Math.sqrt(Math.pow(latDiff,2) + Math.pow(lngDiff,2));
-                console.log(distance);
+                console.log("distance: "+distance);
                 if (distance < .3) { // 20 miles
                   setNames(names => [...names,itemRef.name]);
-                  console.log(metadata.customMetadata.likes);
+                  console.log("likes: "+metadata.customMetadata.likes);
                   setLikes(likes => [...likes,parseInt(metadata.customMetadata.likes)]);
                   return getDownloadURL(itemRef);
                 } else return null;
@@ -72,17 +72,14 @@ function Main(props) {
     pairs.sort(function(a,b){
       return b[0]-a[0];
     })
-    console.log(pairs);
     for (let i = 0; i < images.length; i++) {
       imageLayout[i % 5].push(pairs[i]);
     }
-    console.log(imageLayout);
     return (
       <div className="column-container">
         {imageLayout.map((col) => (
           <div className="column">
             {col.map((img) => {
-              console.log(img);
               return (
               <ImageSmall
                 img={img[1]}
