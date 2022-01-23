@@ -61,7 +61,7 @@ function Main(props) {
   const showImages = () =>  {
     const imageLayout = [[], [], [], [], []];
     const refLayout = [[],[],[],[],[]];
-    const images = [...urls];
+    const images = [...urls].filter(url => url != null);
     for (let i = 0; i < images.length; i++) {
       imageLayout[i % 5].push(images[i]);
       refLayout[i % 5].push(names[i]);
