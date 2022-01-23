@@ -20,7 +20,7 @@ import map from "../img/map.svg";
 import "./profile.css";
 
 function Profile(props) {
-  const {lat,lng, setIsMapOpen } = useContext(LocationContext);
+  const { lat, lng, setIsMapOpen } = useContext(LocationContext);
   const { setIsSignedIn } = useContext(AuthContext);
   const { setIsProfileOpen } = useContext(ProfileContext);
   const auth = getAuth();
@@ -52,7 +52,7 @@ function Profile(props) {
 
   const showImages = () => {
     const imageLayout = [[], [], [], [], []];
-    const images = [...urls].filter(url => url != null);
+    const images = [...urls].filter((url) => url != null);
     console.log(images);
     for (let i = 0; i < images.length; i++) {
       imageLayout[i % 5].push(images[i]);
@@ -82,7 +82,7 @@ function Profile(props) {
         </OutsideAlerter>
       )}
 
-      <div className={`content-container ${openedImage && "blur"}`}>
+      <div className={`profile-container ${openedImage && "blur"}`}>
         <h2>Your Posts</h2>
         <img
           className="back-button"

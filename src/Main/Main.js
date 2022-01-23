@@ -15,18 +15,19 @@ import { ProfileContext } from "../Profile/ProfileContext.js";
 import profileImg from "../img/profile.svg";
 import ImageSmall from "./ImageSmall.js";
 import "./main.css";
+import logo from "../img/logo-main.svg";
 
 function Main(props) {
   const [openedImage, setOpenedImage] = useState(null);
-  const {lat,lng} = useContext(LocationContext); 
-  const [urls,setUrls] = useState([]);
-  const [names,setNames] = useState([]);
-  const [change,setChange] = useState(false);
+  const { lat, lng } = useContext(LocationContext);
+  const [urls, setUrls] = useState([]);
+  const [names, setNames] = useState([]);
+  const [change, setChange] = useState(false);
   const { isProfileOpen, setIsProfileOpen } = useContext(ProfileContext);
-  
+
   const handleChange = () => {
     setChange(!change);
-  }
+  };
 
   // Download photos
   useEffect(() => {
@@ -34,18 +35,20 @@ function Main(props) {
       const storage = getStorage();
       const newRef = ref(storage, "images");
       let result = await listAll(newRef);
-      let urlsPromises = result.items.map(itemRef => {
-            return getMetadata(itemRef)
-              .then((metadata) => {
-                const latDiff = parseFloat(metadata.customMetadata.lat) - lat;
-                const lngDiff = parseFloat(metadata.customMetadata.long) - lng;
-                const distance = Math.sqrt(Math.pow(latDiff,2) + Math.pow(lngDiff,2));
-                console.log(distance);
-                if (distance < .3) { // 20 miles
-                  setNames(refs => [...refs,itemRef.name]);
-                  return getDownloadURL(itemRef);
-                } else return null;
-              });
+      let urlsPromises = result.items.map((itemRef) => {
+        return getMetadata(itemRef).then((metadata) => {
+          const latDiff = parseFloat(metadata.customMetadata.lat) - lat;
+          const lngDiff = parseFloat(metadata.customMetadata.long) - lng;
+          const distance = Math.sqrt(
+            Math.pow(latDiff, 2) + Math.pow(lngDiff, 2)
+          );
+          console.log(distance);
+          if (distance < 0.3) {
+            // 20 miles
+            setNames((refs) => [...refs, itemRef.name]);
+            return getDownloadURL(itemRef);
+          } else return null;
+        });
       });
       return Promise.all(urlsPromises);
     };
@@ -54,14 +57,12 @@ function Main(props) {
       setUrls(urls);
     };
     loadImages();
-  }
-  
-  ,[change,lat,lng]);
-  
-  const showImages = () =>  {
+  }, [change, lat, lng]);
+
+  const showImages = () => {
     const imageLayout = [[], [], [], [], []];
-    const refLayout = [[],[],[],[],[]];
-    const images = [...urls].filter(url => url != null);
+    const refLayout = [[], [], [], [], []];
+    const images = [...urls].filter((url) => url != null);
     for (let i = 0; i < images.length; i++) {
       imageLayout[i % 5].push(images[i]);
       refLayout[i % 5].push(names[i]);
@@ -97,13 +98,13 @@ function Main(props) {
           )}
 
           <div className={`content-container ${openedImage && "blur"}`}>
-            <h2>our app name owo</h2>
+            <img src={logo} className="logo" />
             <img
               className="profile-button"
               src={profileImg}
               onClick={() => setIsProfileOpen(true)}
             />
-            <Upload onChange={handleChange}/>
+            <Upload onChange={handleChange} />
             {showImages()}
           </div>
         </div>
