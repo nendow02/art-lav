@@ -6,19 +6,20 @@ import {
   getMetadata,
   getDownloadURL,
 } from "firebase/storage";
-import Upload from "../upload.js";
+import Upload from "../Upload/upload.js";
 import Profile from "../Profile/Profile.js";
 import Image from "../Image/Image.js";
 import OutsideAlerter from "../Image/OutsideAlerter.js";
 import { LocationContext } from "../Location/LocationContext.js";
+import { ProfileContext } from "../Profile/ProfileContext.js";
 import profileImg from "../img/profile.svg";
 import ImageSmall from "./ImageSmall.js";
 import "./main.css";
 
 function Main(props) {
-  const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [openedImage, setOpenedImage] = useState(null);
   const { lat, lng } = useContext(LocationContext);
+  const { isProfileOpen, setIsProfileOpen } = useContext(ProfileContext);
   const [urls, setUrls] = useState([]);
 
   // Download photos

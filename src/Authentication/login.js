@@ -39,7 +39,8 @@ function Login(props) {
         // Signed in
         setid(userCredential.user.id);
         setIsSignedIn(true);
-        setIsMapOpen(true);
+        setIsMapOpen(false);
+        setNewAccount(false);
       })
       .catch((error) => {
         alert(error.message);
@@ -90,6 +91,7 @@ function Login(props) {
               .then((userCredential) => {
                 // Signed in
                 setid(userCredential.user.id);
+                setNewAccount(true);
               })
               .catch((error) => {
                 alert(error.message);

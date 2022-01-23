@@ -1,14 +1,18 @@
 import React, { useState, useContext } from "react";
 import MapPicker from "react-google-map-picker";
 import { LocationContext } from "./LocationContext.js";
+import { ProfileContext } from "../Profile/ProfileContext.js";
+import profileImg from "../img/profile.svg";
+import backButton from "../img/back.svg";
 import "./location.css";
 
 const Map = (props) => {
   const DefaultZoom = 10;
   const [zoom, setZoom] = useState(DefaultZoom);
 
-  const { lat, lng, setLat, setLng, setIsMapOpen } =
+  const { lat, lng, setLat, setLng, setIsMapOpen, newAccount, setNewAccount } =
     useContext(LocationContext);
+  const { isProfileOpen, setIsProfileOpen } = useContext(ProfileContext);
 
   function handleChangeLocation(lat, lng) {
     setLat(lat);
@@ -37,13 +41,38 @@ const Map = (props) => {
           filter: `drop-shadow(5px 5px 5px #272727)`,
         }}
       />
-      <button
-        style={{ margin: "30px" }}
-        onClick={() => setIsMapOpen(false)}
-        className="done"
-      >
-        I'm done!
-      </button>
+      {newAccount && (
+        <button
+          style={{ margin: "30px" }}
+          onClick={() => {
+            setNewAccount(false);
+            setIsMapOpen(false);
+          }}
+          className="done"
+        >
+          I'm done!
+        </button>
+      )}
+      {!newAccount && (
+        <img
+          className="profile-button"
+          src={profileImg}
+          onClick={() => {
+            setIsMapOpen(false);
+            setIsProfileOpen(true);
+          }}
+        />
+      )}
+      {!newAccount && (
+        <img
+          className="back-button"
+          src={backButton}
+          onClick={() => {
+            setIsMapOpen(false);
+            setIsProfileOpen(false);
+          }}
+        />
+      )}
     </div>
   );
 };

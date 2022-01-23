@@ -25,11 +25,12 @@ function Upload() {
       return;
     }
     let id = auth.currentUser.uid;
-    const newRef = ref(storage, "images/" + id + "/" + e.name);
+    const newRef = ref(storage, "images/" + e.name);
     const newMetadata = {
       customMetadata: {
         lat: "" + lat,
         long: "" + lng,
+        id: auth.currentUser.id,
       },
     };
     uploadBytes(newRef, e)

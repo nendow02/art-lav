@@ -47,3 +47,9 @@ h2 {
 .signup:hover {
   opacity: 70%;
 }
+
+.back-button {
+}
+.back-button:hover {
+  opacity: 70%;
+}
