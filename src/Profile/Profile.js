@@ -4,7 +4,7 @@ import { getAuth, signOut } from "firebase/auth";
 import { AuthContext } from "../Authentication/AuthContext.js";
 
 function Profile(props) {
-  const { lat, lng, setIsMapOpen } = useContext(LocationContext);
+  const { setIsMapOpen } = useContext(LocationContext);
   const { setIsSignedIn } = useContext(AuthContext);
   const auth = getAuth();
 

@@ -24,13 +24,13 @@ function Upload(props) {
       alert("Location not chosen");
       return;
     }
-    let id = auth.currentUser.uid;
     const newRef = ref(storage, "images/" + e.name);
     const newMetadata = {
       customMetadata: {
         lat: "" + lat,
         long: "" + lng,
-        id:auth.currentUser.id
+        id:auth.currentUser.uid,
+        likes:"0"
       },
     };
     uploadBytes(newRef, e)

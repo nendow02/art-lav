@@ -20,6 +20,7 @@ function Main(props) {
   const [openedImage, setOpenedImage] = useState(null);
   const {lat,lng} = useContext(LocationContext); 
   const [urls,setUrls] = useState([]);
+  const [names,setNames] = useState([]);
   const [change,setChange] = useState(false);
   const { isProfileOpen, setIsProfileOpen } = useContext(ProfileContext);
   
@@ -41,6 +42,7 @@ function Main(props) {
                 const distance = Math.sqrt(Math.pow(latDiff,2) + Math.pow(lngDiff,2));
                 console.log(distance);
                 if (distance < .3) { // 20 miles
+                  setNames(refs => [...refs,itemRef.name]);
                   return getDownloadURL(itemRef);
                 } else return null;
               });
@@ -54,14 +56,16 @@ function Main(props) {
     loadImages();
   }
   
-  ,[change]);
+  ,[change,lat,lng]);
   
   const showImages = () =>  {
     const imageLayout = [[], [], [], [], []];
+    const refLayout = [[],[],[],[],[]];
     const images = [...urls];
-    console.log(images);
     for (let i = 0; i < images.length; i++) {
       imageLayout[i % 5].push(images[i]);
+      refLayout[i % 5].push(names[i]);
+      console.log(images[i]);
     }
     return (
       <div className="column-container">
@@ -70,6 +74,7 @@ function Main(props) {
             {col.map((img) => (
               <ImageSmall
                 img={img}
+                name={refLayout[col.indexOf(img)]}
                 openedImage={openedImage}
                 setOpenedImage={setOpenedImage}
               />
