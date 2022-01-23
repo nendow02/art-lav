@@ -1,36 +1,58 @@
-import { useState } from "react";
-import Upload from "../Upload/upload.js";
+import { useState, useContext, useEffect } from "react";
+import {
+  getStorage,
+  listAll,
+  ref,
+  getMetadata,
+  getDownloadURL,
+} from "firebase/storage";
+import Upload from "../upload.js";
 import Profile from "../Profile/Profile.js";
 import Image from "../Image/Image.js";
 import OutsideAlerter from "../Image/OutsideAlerter.js";
+import { LocationContext } from "../Location/LocationContext.js";
 import profileImg from "../img/profile.svg";
 import ImageSmall from "./ImageSmall.js";
 import "./main.css";
 
-// dummy images
-import Eren from "../img/eren.png";
-import Hornbee from "../img/hornbee.png";
-
-const liked = false;
-
 function Main(props) {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [openedImage, setOpenedImage] = useState(null);
+  const { lat, lng } = useContext(LocationContext);
+  const [urls, setUrls] = useState([]);
 
-  // generating list of dummy images
-  const dummyImages = () => {
-    const dummies = [Eren, Hornbee];
-    let images = [];
-    for (let i = 0; i < 13; i++) {
-      images = images.concat(dummies);
-    }
-    images.pop();
-    return images;
-  };
+  // Download photos
+  useEffect(() => {
+    const fetchImages = async () => {
+      const storage = getStorage();
+      const newRef = ref(storage, "images");
+      let result = await listAll(newRef);
+      let urlsPromises = result.items.map((itemRef) => {
+        return getMetadata(itemRef).then((metadata) => {
+          const latDiff = parseFloat(metadata.customMetadata.lat) - lat;
+          const lngDiff = parseFloat(metadata.customMetadata.long) - lng;
+          const distance = Math.sqrt(
+            Math.pow(latDiff, 2) + Math.pow(lngDiff, 2)
+          );
+          if (distance < 0.3) {
+            // 20 miles
+            return getDownloadURL(itemRef);
+          } else return null;
+        });
+      });
+      return Promise.all(urlsPromises);
+    };
+    const loadImages = async () => {
+      const urls = await fetchImages();
+      setUrls(urls);
+    };
+    loadImages();
+  }, []);
 
   const showImages = () => {
-    const images = dummyImages();
     const imageLayout = [[], [], [], [], []];
+    const images = [...urls];
+    console.log(images);
     for (let i = 0; i < images.length; i++) {
       imageLayout[i % 5].push(images[i]);
     }
