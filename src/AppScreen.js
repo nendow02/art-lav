@@ -7,12 +7,12 @@ import Location from "./Location/Location.js";
 import Main from "./Main/Main.js";
 
 function AppScreen() {
-  const { isMapOpen } = useContext(LocationContext);
-  const {isSignedIn} = useContext(AuthContext);
+  const { isMapOpen, newAccount } = useContext(LocationContext);
+  const { isSignedIn } = useContext(AuthContext);
   return (
     <div className="App">
-      {!isSignedIn && <Login/>}
-      {isMapOpen && <Location />}
+      {!isSignedIn && <Login />}
+      {isMapOpen && <Location new={newAccount} />}
       {!isMapOpen && isSignedIn && <Main />}
     </div>
   );

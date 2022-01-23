@@ -4,11 +4,11 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  signOut,
 } from "firebase/auth";
 import { useState, useContext } from "react";
 import { AuthContext } from "./AuthContext";
 import { LocationContext } from "../Location/LocationContext";
+import { ProfileContext } from "../Profile/ProfileContext.js";
 import loginOr from "../img/login-or.svg";
 
 function Login(props) {
@@ -25,13 +25,13 @@ function Login(props) {
   // Initialize Firebase
   initializeApp(config);
   const { setid, setIsSignedIn } = useContext(AuthContext);
-  const { setIsMapOpen } = useContext(LocationContext);
+  const { setIsMapOpen, setNewAccount } = useContext(LocationContext);
+  const { setIsProfileOpen } = useContext(ProfileContext);
   const auth = getAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleKeyPress = (e) => {
-    console.log(e);
     if (e.code === "Enter") login();
   };
 
@@ -41,7 +41,9 @@ function Login(props) {
         // Signed in
         setid(userCredential.user.id);
         setIsSignedIn(true);
-        setIsMapOpen(true);
+        setIsMapOpen(false);
+        setNewAccount(false);
+        setIsProfileOpen(false);
       })
       .catch((error) => {
         alert(error.message);
@@ -92,6 +94,9 @@ function Login(props) {
               .then((userCredential) => {
                 // Signed in
                 setid(userCredential.user.id);
+                setIsSignedIn(true);
+                setNewAccount(true);
+                setIsMapOpen(true);
               })
               .catch((error) => {
                 alert(error.message);
@@ -101,13 +106,6 @@ function Login(props) {
           Sign Up!
         </button>
         <br />
-        <button
-          onClick={() => {
-            signOut(auth).then(() => console.log("signed out"));
-          }}
-        >
-          Sign out
-        </button>
       </div>
     </div>
   );

@@ -1,11 +1,44 @@
 .location {
-  background-color: #3a3636;
+  background-color: #645c73;
   text-align: center;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  color: #d2c0f0;
+}
+
+h2 {
+  font-size: 48px;
+  position: absolute;
+  margin: 1.5rem;
+  padding: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+}
+
+.done {
+  font-size: 20px;
+  width: 10rem;
+  height: 2.2rem;
+  border-radius: 15px;
+  border-width: 0;
+  background-color: #c8aef5;
+  color: #645c73;
+  cursor: pointer;
+}
+.done:hover {
+  opacity: 70%;
+}
+
+.back-button {
+  cursor: pointer;
+  position: absolute;
+  top: 40px;
+  left: 55px;
+}
+.back-button:hover {
+  opacity: 70%;
 }

@@ -1,11 +1,31 @@
-.opened-image {
+.image-container {
   position: fixed;
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: max(350px, 35%);
+}
+
+.opened-image {
+  position: relative;
+  width: 100%;
+  /* width: max(350px, 70%); */
+  border-radius: 15px;
+  filter: drop-shadow(10px 10px 10px #272727);
+}
+
+.like-button {
+  position: absolute;
   z-index: 10;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto auto;
-  width: 40%; /* Need a specific value to work */
-  padding: 0;
+  top: 5%;
+  right: 5%;
+  width: 8%;
+  cursor: pointer;
+}
+
+.invisible {
+  display: none;
 }
