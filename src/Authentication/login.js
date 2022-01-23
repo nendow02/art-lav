@@ -8,6 +8,7 @@ import {
 import { useState, useContext } from "react";
 import { AuthContext } from "./AuthContext";
 import { LocationContext } from "../Location/LocationContext";
+import { ProfileContext } from "../Profile/ProfileContext.js";
 import loginOr from "../img/login-or.svg";
 
 function Login(props) {
@@ -25,6 +26,7 @@ function Login(props) {
   initializeApp(config);
   const { setid, setIsSignedIn } = useContext(AuthContext);
   const { setIsMapOpen, setNewAccount } = useContext(LocationContext);
+  const { setIsProfileOpen } = useContext(ProfileContext);
   const auth = getAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -41,6 +43,7 @@ function Login(props) {
         setIsSignedIn(true);
         setIsMapOpen(false);
         setNewAccount(false);
+        setIsProfileOpen(false);
       })
       .catch((error) => {
         alert(error.message);
@@ -91,7 +94,9 @@ function Login(props) {
               .then((userCredential) => {
                 // Signed in
                 setid(userCredential.user.id);
+                setIsSignedIn(true);
                 setNewAccount(true);
+                setIsMapOpen(true);
               })
               .catch((error) => {
                 alert(error.message);
