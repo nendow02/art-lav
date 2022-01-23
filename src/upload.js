@@ -12,7 +12,7 @@ function Upload() {
 
     const handleSubmit = (e) => {
       if (!auth.currentUser) {
-        console.log("Not signed in");
+        alert("Not signed in");
         return;
       }
       if (!e) {
@@ -23,12 +23,12 @@ function Upload() {
           alert("Location not chosen");
           return;
       }
-      let id = auth.currentUser.uid;
-      const newRef = ref(storage,'images/' + id + '/' + e.name);
+      const newRef = ref(storage,'images/'+ e.name);
       const newMetadata = {
         customMetadata: {
         'lat':''+lat,
-        'long':''+lng
+        'long':''+lng,
+        'id':auth.currentUser.id
         }
       }
        uploadBytes(newRef,e)
