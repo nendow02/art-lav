@@ -33,22 +33,11 @@ h2 {
   opacity: 70%;
 }
 
-.signup {
-  margin-top: 1rem;
-  width: 17rem;
-  height: 2.5rem;
-  border-radius: 20px;
-  border-width: 0;
-  font-size: 26px;
-  background-color: #c8aef5;
-  color: #645c73;
-  cursor: pointer;
-}
-.signup:hover {
-  opacity: 70%;
-}
-
 .back-button {
+  cursor: pointer;
+  position: absolute;
+  top: 40px;
+  left: 55px;
 }
 .back-button:hover {
   opacity: 70%;
