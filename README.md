@@ -1,70 +1,57 @@
-# Getting Started with Create React App
+# art lav
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Share your (queer) art to your local LGBTQ+ community :3
 
-## Available Scripts
+## The Problem
 
-In the project directory, you can run:
+Despite growing media representations of the LGBTQ+ community, the vast majority of queer represntation stems from urbanized populations. Those living in rural areas or countries with a smaller LGBTQ+ presence may have a hard time finding a queer community in their local sphere and feel comparatively isolated as a result. We need a safe platform for people to connect with other queer people in their area no matter where in the world they live in.
 
-### `npm start`
+## Our Solution
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+With full anonymity, *art lav* provides artists a platform to connect with other artists within a 20 mile radius. Any form of artisitc self expression, including queer art and art made by queer artists, is highly encouraged! *art lav* will help you find and connect with your local LGBTQ+ community through art.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## How it works
 
-### `npm test`
+*art lav* is a React web app that allows users to select their location and then view and post artwork anonymously to a 20 mile radius. The posts, locations, and individual user data is stored in Firebase authentication and storage.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Here is a detailed list of features:
 
-### `npm run build`
+- user signup, login, signout, and forgot password functionality
+- allow user to select and change their location coordinates through an interactive map
+- filter user feed to show posts from a 20 mile radius
+- allow user to post their own art
+- allow user to access the art they posted in their profile page
+- allow user to like posts in their feed
+- order local posts based on number of total likes (top liked posts appear on the top of the feed)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Design + Final Result
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+![image](https://user-images.githubusercontent.com/50722281/150686934-c4040e5e-a35f-4951-90f1-8e4ea5161d0c.png)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### Main Feed
+Special thanks to @chosuh for allowing us to use her art for the demo :)
+![image](https://user-images.githubusercontent.com/50722281/150670272-ca39f233-862c-402e-87e6-971708b56cde.png)
 
-### `npm run eject`
+#### Login/Signup
+![image](https://user-images.githubusercontent.com/50722281/150670293-34a461e5-fb40-4234-b9a7-1529c0052ad9.png)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+#### Location Selection
+![image](https://user-images.githubusercontent.com/50722281/150670317-b57d4172-c460-405a-8a14-644586b86a38.png)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### Your Posts/Profile
+![image](https://user-images.githubusercontent.com/50722281/150670379-64726bd4-fd52-4d52-bc11-371663f1a85f.png)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Challenges
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- having little prior experience in backend, specifically Firebase caused some delays in implementing features such as photo uploads
+- there were some issues in determining the math needed to decide which photos were the user radius
+- implementing the useContext hook for the first time
+- css bugs, such as when applying a filter causes child elements to change position from absolute to relative
 
-## Learn More
+## Future Opportunities
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Given more time, we would expand this project to contain more features such as:
+- a report button, to moderate content and provide a safe online space
+- allowing the user to alter their location radius (as opposed to the default 20 miles)
+- providing users an option to link their socials to their art
+- enhanced security
