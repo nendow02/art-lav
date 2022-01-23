@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import unlikedImg from "../img/unliked.svg";
+import unlikedImgHover from "../img/unliked-hover.svg";
 import likedImg from "../img/liked.svg";
 import { updateMetadata, getMetadata, getStorage, ref} from "firebase/storage";
 import "./main.css";
@@ -54,6 +55,8 @@ function ImageSmall(props) {
             setLiked(true);
             handleClick(true);
           }}
+          onMouseOver={(e) => (e.currentTarget.src = unlikedImgHover)}
+          onMouseOut={(e) => (e.currentTarget.src = unlikedImg)}
         />
       )}
       {liked && (

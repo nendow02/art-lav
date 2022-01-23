@@ -47,6 +47,7 @@ const Map = (props) => {
           onClick={() => {
             setNewAccount(false);
             setIsMapOpen(false);
+            setIsProfileOpen(false);
           }}
           className="done"
         >
