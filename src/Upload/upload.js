@@ -5,7 +5,7 @@ import { getStorage, ref, uploadBytes, updateMetadata } from "firebase/storage";
 import { LocationContext } from "../Location/LocationContext";
 import { useContext } from "react";
 
-function Upload() {
+function Upload(props) {
   // Get a reference to the storage service, which is used to create references in your storage bucket
   const storage = getStorage();
   const auth = getAuth();
@@ -25,18 +25,22 @@ function Upload() {
       return;
     }
     let id = auth.currentUser.uid;
-    const newRef = ref(storage, "images/" + id + "/" + e.name);
+    const newRef = ref(storage, "images/" + e.name);
     const newMetadata = {
       customMetadata: {
         lat: "" + lat,
         long: "" + lng,
+        id:auth.currentUser.id
       },
     };
     uploadBytes(newRef, e)
       .then((snapshot) => {
         console.log("upload success");
         updateMetadata(newRef, newMetadata)
-          .then(() => console.log("metadata success"))
+          .then(() => {
+            console.log("metadata success");
+            props.onChange();
+          })
           .catch((error) => {
             alert(error.message);
           });

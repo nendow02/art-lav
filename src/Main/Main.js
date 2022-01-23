@@ -1,6 +1,6 @@
 import { useState,useContext, useEffect } from "react";
 import { getStorage, listAll, ref, getMetadata, getDownloadURL } from "firebase/storage";
-import Upload from "../upload.js";
+import Upload from "../Upload/upload";
 import Profile from "../Profile/Profile.js";
 import Image from "../Image/Image.js";
 import OutsideAlerter from "../Image/OutsideAlerter.js";
@@ -13,6 +13,11 @@ function Main(props) {
   const [openedImage, setOpenedImage] = useState(null);
   const {lat,lng} = useContext(LocationContext); 
   const [urls,setUrls] = useState([]);
+  const [change,setChange] = useState(false);
+  
+  const handleChange = () => {
+    setChange(!change);
+  }
 
   // Download photos
   useEffect(() => {
@@ -26,6 +31,7 @@ function Main(props) {
                 const latDiff = parseFloat(metadata.customMetadata.lat) - lat;
                 const lngDiff = parseFloat(metadata.customMetadata.long) - lng;
                 const distance = Math.sqrt(Math.pow(latDiff,2) + Math.pow(lngDiff,2));
+                console.log(distance);
                 if (distance < .3) { // 20 miles
                   return getDownloadURL(itemRef);
                 } else return null;
@@ -40,7 +46,7 @@ function Main(props) {
     loadImages();
   }
   
-  ,[]);
+  ,[change]);
   
   const showImages = () =>  {
     const imageLayout = [[], [], [], [], []];
@@ -84,7 +90,7 @@ function Main(props) {
               src={profileImg}
               onClick={() => setIsProfileOpen(true)}
             />
-            <Upload />
+            <Upload onChange={handleChange}/>
             {showImages()}
           </div>
         </div>
