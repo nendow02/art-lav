@@ -29,6 +29,7 @@ Here is a detailed list of features:
 ![image](https://user-images.githubusercontent.com/50722281/150670055-fda6e5f9-9068-497e-a715-b4255e3d09c1.png)
 
 #### Main Feed
+Special thanks to @chosuh for allowing us to use her art for the demo :)
 ![image](https://user-images.githubusercontent.com/50722281/150670272-ca39f233-862c-402e-87e6-971708b56cde.png)
 
 #### Login/Signup
@@ -54,5 +55,3 @@ Given more time, we would expand this project to contain more features such as:
 - allowing the user to alter their location radius (as opposed to the default 20 miles)
 - providing users an option to link their socials to their art
 - enhanced security
-
-Special thanks to @chosuh for allowing us to use her art for the demo :)
