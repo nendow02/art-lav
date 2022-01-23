@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./image.css";
 import unliked from "../img/unliked.svg";
 import liked from "../img/liked.svg";
+import unlikedImgHover from "../img/unliked-hover.svg";
 
 function Image(props) {
   const [isLiked, setIsLiked] = useState(false);
@@ -22,12 +23,14 @@ function Image(props) {
           src={unliked}
           className={`like-button ${!showLike && "invisible"}`}
           onClick={() => setIsLiked(true)}
+          onMouseOver={(e) => (e.currentTarget.src = unlikedImgHover)}
+          onMouseOut={(e) => (e.currentTarget.src = unliked)}
         />
       )}
       {isLiked && (
         <img
           src={liked}
-          className={`like-button ${!showLike && "invisible"}`}
+          className={`like-button`}
           onClick={() => setIsLiked(false)}
         />
       )}
