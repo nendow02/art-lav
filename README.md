@@ -2,6 +2,8 @@
 
 Share your (queer) art to your local LGBTQ+ community :3
 
+watch a video of our demo! https://youtu.be/8Fp89tMSdFA
+
 ## The Problem
 
 Despite growing media representations of the LGBTQ+ community, the vast majority of queer represntation stems from urbanized populations. Those living in rural areas or countries with a smaller LGBTQ+ presence may have a hard time finding a queer community in their local sphere and feel comparatively isolated as a result. We need a safe platform for people to connect with other queer people in their area no matter where in the world they live in.
