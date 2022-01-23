@@ -88,7 +88,7 @@ function Profile(props) {
         </OutsideAlerter>
       )}
 
-      <div className={openedImage && "blur"}>
+      <div className={`content-container ${openedImage && "blur"}`}>
         <h2>Your Posts</h2>
         <img
           className="back-button"

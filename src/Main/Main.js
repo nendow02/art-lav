@@ -85,8 +85,8 @@ function Main(props) {
             </OutsideAlerter>
           )}
 
-          <div className={openedImage && "blur"}>
-            <h1>our app name owo</h1>
+          <div className={`content-container ${openedImage && "blur"}`}>
+            <h2>our app name owo</h2>
             <img
               className="profile-button"
               src={profileImg}
