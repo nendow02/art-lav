@@ -68,6 +68,7 @@
   position: absolute;
   top: 40px;
   right: 55px;
+  z-index: 1;
 }
 .profile-button:hover {
   opacity: 0.5;

@@ -1,0 +1,10 @@
+.map-button {
+  cursor: pointer;
+  position: absolute;
+  top: 40px;
+  right: 120px;
+  z-index: 1;
+}
+.map-button:hover {
+  opacity: 0.5;
+}
