@@ -1,17 +1,27 @@
+.main {
+  background-color: #3a3636;
+  text-align: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
 .blur {
   -webkit-filter: blur(5px);
   -moz-filter: blur(5px);
   -o-filter: blur(5px);
   -ms-filter: blur(5px);
   filter: blur(5px);
-  width: 100px;
-  height: 100px;
-  background-color: #ccc;
 }
 
 .column-container {
   display: flex;
   flex-direction: row;
+  justify-content: center;
 }
 
 .column {
@@ -22,4 +32,21 @@
 .image {
   width: 200px;
   margin: 10px;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.image:hover {
+  opacity: 0.5;
+}
+
+.unclickable {
+  pointer-events: none;
+}
+
+.profile-button {
+  cursor: pointer;
+  position: absolute;
+  top: 40px;
+  right: 55px;
 }

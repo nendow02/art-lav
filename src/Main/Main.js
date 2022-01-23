@@ -5,6 +5,7 @@ import Profile from "../Profile/Profile.js";
 import Image from "../Image/Image.js";
 import OutsideAlerter from "../Image/OutsideAlerter.js";
 import { LocationContext } from "../Location/LocationContext.js";
+import profileImg from "../img/profile.svg";
 import "./main.css";
 
 function Main(props) {
@@ -55,7 +56,7 @@ function Main(props) {
             {col.map((img) => (
               <img
                 src={img}
-                className="image"
+                className={`image ${openedImage && "unclickable"}`}
                 onClick={() => setOpenedImage(img)}
               />
             ))}
@@ -66,7 +67,7 @@ function Main(props) {
   };
 
   return (
-    <div>
+    <div className="main">
       {isProfileOpen && <Profile setIsProfileOpen={setIsProfileOpen} />}
       {!isProfileOpen && (
         <div>
@@ -78,12 +79,13 @@ function Main(props) {
 
           <div className={openedImage && "blur"}>
             <h1>our app name owo</h1>
-            <button onClick={() => setIsProfileOpen(true)}>
-              go to profile page
-            </button>
-            <div>images go brr</div>
-            {showImages()}
+            <img
+              className="profile-button"
+              src={profileImg}
+              onClick={() => setIsProfileOpen(true)}
+            />
             <Upload />
+            {showImages()}
           </div>
         </div>
       )}

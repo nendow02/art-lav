@@ -1,0 +1,11 @@
+.opened-image {
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto auto;
+  width: 40%; /* Need a specific value to work */
+  padding: 0;
+}

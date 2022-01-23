@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import MapPicker from "react-google-map-picker";
 import { LocationContext } from "./LocationContext.js";
+import "./location.css";
 
 const Map = (props) => {
   const DefaultZoom = 10;
@@ -19,7 +20,7 @@ const Map = (props) => {
   }
 
   return (
-    <div>
+    <div className="location">
       <h2>Select your location:</h2>
       <MapPicker
         defaultLocation={{ lat: lat, lng: lng }}
