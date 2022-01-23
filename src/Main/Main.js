@@ -15,6 +15,7 @@ import { ProfileContext } from "../Profile/ProfileContext.js";
 import profileImg from "../img/profile.svg";
 import ImageSmall from "./ImageSmall.js";
 import "./main.css";
+import logo from "../img/logo-main.svg";
 
 function Main(props) {
   const [openedImage, setOpenedImage] = useState(null);
@@ -24,10 +25,10 @@ function Main(props) {
   const [likes,setLikes] = useState([]);
   const [change,setChange] = useState(false);
   const { isProfileOpen, setIsProfileOpen } = useContext(ProfileContext);
-  
+
   const handleChange = () => {
     setChange(!change);
-  }
+  };
 
   // Download photos
   useEffect(() => {
@@ -37,6 +38,7 @@ function Main(props) {
       const storage = getStorage();
       const newRef = ref(storage, "images");
       let result = await listAll(newRef);
+<<<<<<< HEAD
       let urlsPromises = result.items.map(itemRef => {
             return getMetadata(itemRef)
               .then((metadata) => {
@@ -51,6 +53,22 @@ function Main(props) {
                   return getDownloadURL(itemRef);
                 } else return null;
               });
+=======
+      let urlsPromises = result.items.map((itemRef) => {
+        return getMetadata(itemRef).then((metadata) => {
+          const latDiff = parseFloat(metadata.customMetadata.lat) - lat;
+          const lngDiff = parseFloat(metadata.customMetadata.long) - lng;
+          const distance = Math.sqrt(
+            Math.pow(latDiff, 2) + Math.pow(lngDiff, 2)
+          );
+          console.log(distance);
+          if (distance < 0.3) {
+            // 20 miles
+            setNames((refs) => [...refs, itemRef.name]);
+            return getDownloadURL(itemRef);
+          } else return null;
+        });
+>>>>>>> b2870856e0df04ecd129654fe19679138da0531a
       });
       return Promise.all(urlsPromises);
     };
@@ -59,12 +77,11 @@ function Main(props) {
       setUrls(urls);
     };
     loadImages();
-  }
-  
-  ,[change,lat,lng]);
-  
-  const showImages = () =>  {
+  }, [change, lat, lng]);
+
+  const showImages = () => {
     const imageLayout = [[], [], [], [], []];
+<<<<<<< HEAD
     const images = [...urls].filter(url => url != null);
     let pairs = [];
     for (let i=0;i<images.length;i++) {
@@ -74,6 +91,10 @@ function Main(props) {
       return b[0]-a[0];
     })
     console.log(pairs);
+=======
+    const refLayout = [[], [], [], [], []];
+    const images = [...urls].filter((url) => url != null);
+>>>>>>> b2870856e0df04ecd129654fe19679138da0531a
     for (let i = 0; i < images.length; i++) {
       imageLayout[i % 5].push(pairs[i]);
     }
@@ -109,14 +130,14 @@ function Main(props) {
             </OutsideAlerter>
           )}
 
-          <div className={openedImage && "blur"}>
-            <h1>our app name owo</h1>
+          <div className={`content-container ${openedImage && "blur"}`}>
+            <img src={logo} className="logo" />
             <img
               className="profile-button"
               src={profileImg}
               onClick={() => setIsProfileOpen(true)}
             />
-            <Upload onChange={handleChange}/>
+            <Upload onChange={handleChange} />
             {showImages()}
           </div>
         </div>

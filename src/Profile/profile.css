@@ -8,3 +8,9 @@
 .map-button:hover {
   opacity: 0.5;
 }
+
+.profile-container {
+  width: 100vw;
+  height: 100vh;
+  padding: 7rem;
+}

@@ -11,6 +11,7 @@ import { AuthContext } from "./AuthContext";
 import { LocationContext } from "../Location/LocationContext";
 import { ProfileContext } from "../Profile/ProfileContext.js";
 import loginOr from "../img/login-or.svg";
+import logo from "../img/logo-login.svg";
 
 function Login(props) {
   // Your web app's Firebase configuration
@@ -54,7 +55,7 @@ function Login(props) {
   return (
     <div className="wrapper">
       <div className="vertical">
-        <img alt="logo" className="logo" />
+        <img alt="logo" className="logo" src={logo} />
         <br />
         <div className="input-container">
           <input
