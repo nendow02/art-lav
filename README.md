@@ -54,3 +54,5 @@ Given more time, we would expand this project to contain more features such as:
 - allowing the user to alter their location radius (as opposed to the default 20 miles)
 - providing users an option to link their socials to their art
 - enhanced security
+
+Special thanks to @chosuh for allowing us to use her art for the demo :)
